@@ -1,22 +1,24 @@
-import os
-from dotenv import load_dotenv
+import os   # for env vars
+from dotenv import load_dotenv  # for env vars
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands, tasks # tasks is for break function
 from dataclasses import dataclass
 import datetime
-
+# grab constants from environment vars
 load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = int(os.getenv('CHANNEL_ID'))
-MAX_SESSION_TIME = 30
-@dataclass
+MAX_SESSION_TIME = 30   # for break reminder
+
+@dataclass  # to enable break reminder
 class Session:
     is_active: bool = False
     start_time: int = 0
 
-bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
-session = Session()
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())   # standard bot init
 
+############ break reminder function ############
+session = Session()
 @tasks.loop(minutes=MAX_SESSION_TIME, count=2)
 async def break_reminder():
     # Ignore the first execution of this command.
@@ -25,12 +27,12 @@ async def break_reminder():
     
     channel = bot.get_channel(CHANNEL_ID)
     await channel.send(f"**Take a break!** You've been studying for {MAX_SESSION_TIME} minutes.")
-
+############# First bot functions ###########
 @bot.event
 async def on_ready():
-    print("Hello! Pomodoro bot is ready!")
+    print("Hello! Pomodoro bot is ready!")  # output to console
     channel = bot.get_channel(CHANNEL_ID)
-    await channel.send("Hello! Pomodoro bot is ready!")
+    await channel.send("Hello! Pomodoro bot is ready!") # output to channel
 
 @bot.command()
 async def hello(ctx):
@@ -43,7 +45,7 @@ async def add(ctx, *arr):
         result += int(i)
 
     await ctx.send(f"Result: = {result}")
-
+############# Pomodoro Timer #############
 @bot.command()
 async def start(ctx):
     if session.is_active:
@@ -68,7 +70,7 @@ async def end(ctx):
     human_readable_duration = str(datetime.timedelta(seconds=duration))
     break_reminder.stop()
     await ctx.send(f"Session ended after {human_readable_duration} seconds.")
-
+############ Return links ############
 @bot.command()
 async def mlh(ctx):
     await ctx.send(f"https://mlh.io/")
@@ -76,7 +78,7 @@ async def mlh(ctx):
 @bot.command()
 async def ghw(ctx):
     await ctx.send("https://ghw.mlh.io/")
-
+############ Help ###############
 @bot.command()
 async def manual(ctx):
     await ctx.send(f"Hello! I am {bot.user.name}! I am here to help you study! Here are some of the commands you can use:\n\n"
