@@ -8,3 +8,9 @@ A Discord ChatBot made with Python
 - [Discord.py Documentation ](https://discordpy.readthedocs.io/en/stable/quickstart.html)
 ### Developer Mode
 - [Discord Developer Applications](https://discord.com/developers/applications)
+
+- This project hides codes using environment variables. In order to make it work for you, create a file with the name `.env` and place the two variables that you get from Discord Developer Applications: 
+```
+BOT_TOKEN="token string goes here"
+CHANNEL_ID=Integer ID goes here
+```
