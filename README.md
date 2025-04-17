@@ -4,6 +4,8 @@ A Discord ChatBot made with Python
 ![Pomodoro Intro](./images/LaunchSequence.jpg)
 ### The Pixegami Tutorial
 - [YouTube: How to Make a Discord Bot with Python](https://youtu.be/2k9x0s3awss)
+### Real Python Tutorial
+- https://realpython.com/how-to-make-a-discord-bot-python/
 ### Official Doc
 - [Discord.py Documentation ](https://discordpy.readthedocs.io/en/stable/quickstart.html)
 ### Developer Mode
